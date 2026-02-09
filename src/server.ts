@@ -1,10 +1,9 @@
 import app from "./app";
-
-const port = process.env.PORT;
+import { env } from "./config/env";
 
 const main = async () => {
   try {
-    app.listen(port, () => console.log("App is running at port: ", port));
+    app.listen(env.PORT, () => console.log("App is running at port: ", env.PORT));
   } catch (error) {
     console.error("an error occurred: ", error);
     process.exit(1);
