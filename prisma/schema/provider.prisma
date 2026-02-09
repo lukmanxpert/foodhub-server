@@ -1,0 +1,15 @@
+model Provider {
+  id        String   @id() @default(uuid())
+  userId    String   @unique
+  user      User     @relation(fields: [userId], references: [id])
+  name      String   @db.VarChar(50)
+  desc      String?  @db.Text()
+  address   String?  @db.Text()
+  isOpen    Boolean  @default(true)
+  createdAt DateTime @default(now())
+  orders    Order[]
+  meals     Meal[]
+
+  @@index([id])
+  @@map("providers")
+}

@@ -1,0 +1,30 @@
+enum orderStatus {
+  PLACED
+  PREPARING
+  READY
+  DELIVERED
+  CANCELLED
+}
+
+enum paymentMethod {
+  COD
+}
+
+model Order {
+  id            String        @id @default(uuid())
+  customerId    String
+  customer      User          @relation(fields: [customerId], references: [id])
+  providerId    String
+  provider      Provider      @relation(fields: [providerId], references: [id])
+  totalPrice    Decimal
+  status        orderStatus   @default(PLACED)
+  address       String        @db.Text
+  paymentMethod paymentMethod @default(COD)
+  createdAt     DateTime      @default(now())
+  updatedAt     DateTime      @updatedAt
+  reviews       Review[]
+  orderItems    OrderItem[]
+
+  @@index([customerId, providerId])
+  @@map("orders")
+}
