@@ -3,6 +3,7 @@ import cors from "cors";
 import { config } from "dotenv";
 import { toNodeHandler } from "better-auth/node";
 import { auth } from "./lib/auth";
+import { notFount } from "./middlewares/notFound";
 
 config();
 
@@ -22,5 +23,7 @@ app.all("/api/auth/{*any}", toNodeHandler(auth));
 app.get("/", (req, res) => {
   res.send("Hello World.");
 });
+
+app.use(notFount);
 
 export default app;
