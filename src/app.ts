@@ -5,6 +5,7 @@ import { toNodeHandler } from "better-auth/node";
 import { auth } from "./lib/auth";
 import { notFount } from "./middlewares/notFound";
 import { globalErrorHandler } from "./middlewares/globalErrorHandler";
+import { authRouter } from "./modules/auth/auth.route";
 
 config();
 
@@ -25,8 +26,10 @@ app.get("/", (req, res) => {
   res.send("Hello World.");
 });
 
-app.use(notFount);
+app.use("/api/v1/auth", authRouter);
 
 app.use(globalErrorHandler);
+
+app.use(notFount);
 
 export default app;
