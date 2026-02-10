@@ -4,6 +4,7 @@ import { config } from "dotenv";
 import { toNodeHandler } from "better-auth/node";
 import { auth } from "./lib/auth";
 import { notFount } from "./middlewares/notFound";
+import { globalErrorHandler } from "./middlewares/globalErrorHandler";
 
 config();
 
@@ -25,5 +26,7 @@ app.get("/", (req, res) => {
 });
 
 app.use(notFount);
+
+app.use(globalErrorHandler);
 
 export default app;
