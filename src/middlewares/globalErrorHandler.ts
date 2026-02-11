@@ -13,6 +13,15 @@ export const globalErrorHandler = (
     if (err.code === "P2002") {
       return res.status(400).json({
         message: "Duplicate value already exists",
+        error: true,
+        success: false,
+      });
+    }
+    if (err.code === "P2025") {
+      return res.status(404).json({
+        message: "You do not have this resources.",
+        error: true,
+        success: false,
       });
     }
   }

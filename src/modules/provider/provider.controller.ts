@@ -29,4 +29,15 @@ const createProvider = async (req: Request, res: Response) => {
     error: false,
   });
 };
-export const providerController = { createProvider };
+
+const deleteProvider = async (req: Request, res: Response) => {
+  const data = await providerService.deleteProvider(req.user?.id as string);
+  return res.status(200).json({
+    message: "Provider deleted success, you're now a customer.",
+    data,
+    success: true,
+    error: false,
+  });
+};
+
+export const providerController = { createProvider, deleteProvider };

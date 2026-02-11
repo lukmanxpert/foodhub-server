@@ -8,4 +8,21 @@ const createProvider = async (data: any) => {
   return provider;
 };
 
-export const providerService = { createProvider };
+const deleteProvider = async (userId: string) => {
+  const result = await prisma.provider.delete({
+    where: {
+      userId: userId,
+    },
+  });
+  await prisma.user.update({
+    where: {
+      id: userId,
+    },
+    data: {
+      role: "CUSTOMER",
+    },
+  });
+  return result;
+};
+
+export const providerService = { createProvider, deleteProvider };
