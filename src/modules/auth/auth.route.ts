@@ -11,5 +11,10 @@ router.patch(
   requireRole("CUSTOMER", "PROVIDER", "ADMIN"),
   asyncHandler(authController.updateUserProfile),
 );
+router.post(
+  "/me/password/update",
+  requireRole("CUSTOMER", "PROVIDER", "ADMIN"),
+  asyncHandler(authController.updatePassword),
+);
 
 export const authRouter: Router = router;

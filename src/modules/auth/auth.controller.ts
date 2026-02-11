@@ -21,6 +21,31 @@ const getCurrentUser = async (req: Request, res: Response) => {
   });
 };
 
+const updatePassword = async (req: Request, res: Response) => {
+  const { newPassword, currentPassword, reset } = req.body;
+  if (!newPassword || !currentPassword) {
+    return res.status(400).json({
+      message: "Provide required fields.",
+      error: true,
+      success: false,
+    });
+  }
+  const data = await auth.api.changePassword({
+    body: {
+      currentPassword,
+      newPassword,
+      revokeOtherSessions: reset || false,
+    },
+    headers: req.headers,
+  });
+  res.status(200).json({
+    message: "Password changed.",
+    data: data.user,
+    success: true,
+    error: false,
+  });
+};
+
 const updateUserProfile = async (req: Request, res: Response) => {
   const { name, avatar, phone }: UpdateUserProfileData = req.body;
   const payload: UpdateUserProfileData = { name, avatar, phone };
@@ -36,4 +61,8 @@ const updateUserProfile = async (req: Request, res: Response) => {
   });
 };
 
-export const authController = { getCurrentUser, updateUserProfile };
+export const authController = {
+  getCurrentUser,
+  updateUserProfile,
+  updatePassword,
+};
