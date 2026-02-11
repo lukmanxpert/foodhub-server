@@ -8,6 +8,7 @@ export const globalErrorHandler = (
   next: NextFunction,
 ) => {
   console.log("errors :>> ", err);
+  console.log("errors.code :>> ", err.code);
   // Prisma duplicate error
   if (err instanceof Prisma.PrismaClientKnownRequestError) {
     if (err.code === "P2002") {

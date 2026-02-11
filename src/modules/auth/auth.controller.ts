@@ -1,5 +1,7 @@
 import { auth } from "../../lib/auth";
 import { Request, Response } from "express";
+import { authService, UpdateUserProfileData } from "./auth.service";
+
 const getCurrentUser = async (req: Request, res: Response) => {
   const session = await auth.api.getSession({
     headers: req.headers,
@@ -19,4 +21,19 @@ const getCurrentUser = async (req: Request, res: Response) => {
   });
 };
 
-export const authController = { getCurrentUser };
+const updateUserProfile = async (req: Request, res: Response) => {
+  const { name, avatar, phone }: UpdateUserProfileData = req.body;
+  const payload: UpdateUserProfileData = { name, avatar, phone };
+  const data = await authService.updateUserProfile(
+    req.user?.id as string,
+    payload,
+  );
+  return res.status(200).json({
+    message: "Updated success.",
+    data,
+    success: true,
+    error: false,
+  });
+};
+
+export const authController = { getCurrentUser, updateUserProfile };
