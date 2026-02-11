@@ -57,8 +57,19 @@ const updateProvider = async (req: Request, res: Response) => {
   });
 };
 
+const getMyProvider = async (req: Request, res: Response) => {
+  const data = await providerService.getMyProvider(req.user?.id as string);
+  return res.status(200).json({
+    message: "Retrieve provider data.",
+    data,
+    success: true,
+    error: false,
+  });
+};
+
 export const providerController = {
   createProvider,
   deleteProvider,
   updateProvider,
+  getMyProvider,
 };

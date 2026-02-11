@@ -44,4 +44,17 @@ const updateProvider = async (
   return result;
 };
 
-export const providerService = { createProvider, deleteProvider, updateProvider };
+const getMyProvider = async (userId: string) => {
+  return await prisma.provider.findUnique({
+    where: {
+      userId,
+    },
+  });
+};
+
+export const providerService = {
+  createProvider,
+  deleteProvider,
+  updateProvider,
+  getMyProvider,
+};

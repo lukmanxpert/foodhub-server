@@ -20,5 +20,10 @@ router.patch(
   requireRole("PROVIDER"),
   asyncHandler(providerController.updateProvider),
 );
+router.get(
+  "/me",
+  requireRole("PROVIDER"),
+  asyncHandler(providerController.getMyProvider),
+);
 
 export const providerRouter: Router = router;
