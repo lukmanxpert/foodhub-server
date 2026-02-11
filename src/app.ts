@@ -6,6 +6,7 @@ import { auth } from "./lib/auth";
 import { notFount } from "./middlewares/notFound";
 import { globalErrorHandler } from "./middlewares/globalErrorHandler";
 import { authRouter } from "./modules/auth/auth.route";
+import { providerRouter } from "./modules/provider/provider.route";
 
 config();
 
@@ -27,6 +28,7 @@ app.get("/", (req, res) => {
 });
 
 app.use("/api/v1/auth", authRouter);
+app.use("/api/v1/provider", providerRouter);
 
 app.use(globalErrorHandler);
 
