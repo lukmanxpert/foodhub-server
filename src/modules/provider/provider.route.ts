@@ -15,5 +15,10 @@ router.delete(
   requireRole("PROVIDER"),
   asyncHandler(providerController.deleteProvider),
 );
+router.patch(
+  "/update",
+  requireRole("PROVIDER"),
+  asyncHandler(providerController.updateProvider),
+);
 
 export const providerRouter: Router = router;

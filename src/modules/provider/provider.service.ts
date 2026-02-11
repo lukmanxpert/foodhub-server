@@ -1,5 +1,11 @@
-import { Provider } from "../../../generated/prisma/client";
 import { prisma } from "../../lib/prisma";
+
+export interface UpdateProviderPayload {
+  name?: string;
+  desc?: string;
+  address?: string;
+  isOpen?: boolean;
+}
 
 const createProvider = async (data: any) => {
   const provider = await prisma.provider.create({
@@ -25,4 +31,17 @@ const deleteProvider = async (userId: string) => {
   return result;
 };
 
-export const providerService = { createProvider, deleteProvider };
+const updateProvider = async (
+  userId: string,
+  payload: UpdateProviderPayload,
+) => {
+  const result = await prisma.provider.update({
+    where: {
+      userId: userId,
+    },
+    data: payload,
+  });
+  return result;
+};
+
+export const providerService = { createProvider, deleteProvider, updateProvider };

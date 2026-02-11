@@ -1,6 +1,6 @@
 import { Provider } from "../../../generated/prisma/client";
 import { prisma } from "../../lib/prisma";
-import { providerService } from "./provider.service";
+import { providerService, UpdateProviderPayload } from "./provider.service";
 import { Request, Response } from "express";
 
 const createProvider = async (req: Request, res: Response) => {
@@ -40,4 +40,25 @@ const deleteProvider = async (req: Request, res: Response) => {
   });
 };
 
-export const providerController = { createProvider, deleteProvider };
+const updateProvider = async (req: Request, res: Response) => {
+  const payload: UpdateProviderPayload = {
+    name: req.body?.name,
+    desc: req.body?.desc,
+    address: req.body?.address,
+    isOpen: req.body?.isOpen,
+  };
+  const userId = req.user?.id as string;
+  const data = await providerService.updateProvider(userId, payload);
+  return res.status(200).json({
+    message: "Update success.",
+    data,
+    success: true,
+    error: false,
+  });
+};
+
+export const providerController = {
+  createProvider,
+  deleteProvider,
+  updateProvider,
+};
