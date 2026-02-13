@@ -16,5 +16,6 @@ router.post(
   requireRole("CUSTOMER", "PROVIDER", "ADMIN"),
   asyncHandler(authController.updatePassword),
 );
+router.post("/signout", asyncHandler(authController.logOut));
 
 export const authRouter: Router = router;

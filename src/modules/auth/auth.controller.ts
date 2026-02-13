@@ -61,8 +61,20 @@ const updateUserProfile = async (req: Request, res: Response) => {
   });
 };
 
+const logOut = async (req: Request, res: Response) => {
+  await auth.api.signOut({
+    headers: req.headers,
+  });
+  return res.status(200).json({
+    message: "Logout Success.",
+    error: false,
+    success: true,
+  });
+};
+
 export const authController = {
   getCurrentUser,
   updateUserProfile,
   updatePassword,
+  logOut
 };
