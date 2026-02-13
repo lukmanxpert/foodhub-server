@@ -23,6 +23,17 @@ const getAllProviders = async (req: Request, res: Response) => {
   });
 };
 
+const getAllOrders = async (req: Request, res: Response) => {
+  const data = await adminService.getAllOrders();
+  return res.status(200).json({
+    message: "Retrieve all order's data.",
+    totalOrders: data.length,
+    data,
+    success: true,
+    error: false,
+  });
+};
+
 const updateUserAdmin = async (req: Request, res: Response) => {
   const { userId } = req.params;
   if (!userId) {
@@ -46,4 +57,5 @@ export const adminController = {
   getAllUsers,
   getAllProviders,
   updateUserAdmin,
+  getAllOrders,
 };
