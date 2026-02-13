@@ -12,6 +12,17 @@ const getAllUsers = async (req: Request, res: Response) => {
   });
 };
 
+const getAllProviders = async (req: Request, res: Response) => {
+  const data = await adminService.getAllProviders();
+  return res.status(200).json({
+    message: "Retrieve all provider's data.",
+    totalProviders: data.length,
+    data,
+    success: true,
+    error: false,
+  });
+};
+
 const updateUserAdmin = async (req: Request, res: Response) => {
   const { userId } = req.params;
   if (!userId) {
@@ -31,4 +42,8 @@ const updateUserAdmin = async (req: Request, res: Response) => {
   });
 };
 
-export const adminController = { getAllUsers, updateUserAdmin };
+export const adminController = {
+  getAllUsers,
+  getAllProviders,
+  updateUserAdmin,
+};

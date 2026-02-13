@@ -5,6 +5,10 @@ const getAllUsers = async () => {
   return await prisma.user.findMany();
 };
 
+const getAllProviders = async () => {
+  return await prisma.provider.findMany();
+};
+
 const updateUserAdmin = async (userId: string, payload: UserStatus) => {
   const response = await prisma.user.update({
     where: {
@@ -17,4 +21,4 @@ const updateUserAdmin = async (userId: string, payload: UserStatus) => {
   return response;
 };
 
-export const adminService = { getAllUsers, updateUserAdmin };
+export const adminService = { getAllUsers, updateUserAdmin, getAllProviders };
