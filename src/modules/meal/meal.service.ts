@@ -4,4 +4,12 @@ const getAllMeals = async () => {
   return await prisma.meal.findMany();
 };
 
-export const mealService = { getAllMeals };
+const getSingleMeal = async (mealId: string) => {
+  return await prisma.meal.findUnique({
+    where: {
+      id: mealId,
+    },
+  });
+};
+
+export const mealService = { getAllMeals, getSingleMeal };
