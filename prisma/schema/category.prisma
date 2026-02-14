@@ -1,9 +1,11 @@
 model Category {
-  id        String   @id @default(uuid())
-  name      String   @unique @db.VarChar(50)
-  slug      String   @unique @db.VarChar(50)
-  createdAt DateTime @default(now())
-  meals     Meal[]
+  id         String   @id @default(uuid())
+  name       String   @unique @db.VarChar(50)
+  image      String
+  isFeatured Boolean  @default(false)
+  slug       String   @unique @db.VarChar(50)
+  createdAt  DateTime @default(now())
+  meals      Meal[]
 
   @@map("categories")
 }
