@@ -8,4 +8,15 @@ const createCategory = async (payload: categoryPayload) => {
   return data;
 };
 
-export const categoryService = { createCategory };
+const getCategory = async (isFeatured?: boolean) => {
+  const whereCondition = isFeatured !== undefined ? { isFeatured } : {};
+
+  return prisma.category.findMany({
+    where: whereCondition,
+    omit: {
+      createdBy: true,
+    },
+  });
+};
+
+export const categoryService = { createCategory, getCategory };

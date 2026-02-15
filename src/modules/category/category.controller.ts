@@ -33,4 +33,15 @@ const createCategory = async (req: Request, res: Response) => {
   });
 };
 
-export const categoryController = { createCategory };
+const getCategory = async (req: Request, res: Response) => {
+  const { isFeatured } = req.params;
+  const data = await categoryService.getCategory();
+  return res.status(200).json({
+    message: "Retrieve category data",
+    data,
+    error: false,
+    success: true,
+  });
+};
+
+export const categoryController = { createCategory, getCategory };

@@ -10,5 +10,6 @@ router.post(
   requireRole("ADMIN"),
   asyncHandler(categoryController.createCategory),
 );
+router.get("/:isFeatured", asyncHandler(categoryController.getCategory));
 
 export const categoryRouter: Router = router;
