@@ -5,6 +5,9 @@ const getMyOrders = async (userId: string) => {
     where: {
       customerId: userId,
     },
+    orderBy: {
+        createdAt: "desc"
+    },
   });
 };
 

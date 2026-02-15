@@ -4,6 +4,8 @@ model Category {
   image      String
   isFeatured Boolean  @default(false)
   slug       String   @unique @db.VarChar(50)
+  createdBy  String
+  user       User     @relation(fields: [createdBy], references: [id])
   createdAt  DateTime @default(now())
   meals      Meal[]
 

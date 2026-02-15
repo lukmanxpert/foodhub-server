@@ -1,6 +1,10 @@
 import { Request, Response } from "express";
 import { mealService } from "./meal.service";
 
+interface mealPayload {
+  
+} 
+
 const getAllMeals = async (req: Request, res: Response) => {
   const data = await mealService.getAllMeals();
   return res.status(200).json({
@@ -28,5 +32,9 @@ const getSingleMeal = async (req: Request, res: Response) => {
     success: true,
   });
 };
+
+const createMeal = async (req:Request, res: Response) => {
+  const payload = req.body
+}
 
 export const mealController = { getAllMeals, getSingleMeal };

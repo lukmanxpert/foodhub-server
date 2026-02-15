@@ -10,6 +10,7 @@ import { providerRouter } from "./modules/provider/provider.route";
 import { adminRouter } from "./modules/admin/admin.route";
 import { mealRouter } from "./modules/meal/meal.route";
 import { orderRouter } from "./modules/order/order.route";
+import { categoryRouter } from "./modules/category/category.route";
 
 config();
 
@@ -35,6 +36,7 @@ app.use("/api/v1/provider", providerRouter);
 app.use("/api/v1/admin", adminRouter);
 app.use("/api/v1/meal", mealRouter);
 app.use("/api/v1/order", orderRouter);
+app.use("/api/v1/category", categoryRouter);
 
 app.use(globalErrorHandler);
 
