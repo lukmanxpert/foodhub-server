@@ -34,8 +34,13 @@ const createCategory = async (req: Request, res: Response) => {
 };
 
 const getCategory = async (req: Request, res: Response) => {
-  const { isFeatured } = req.params;
-  const data = await categoryService.getCategory();
+  const { isFeatured } = req.query;
+
+  const parsedIsFeatured =
+    isFeatured !== undefined ? isFeatured === "true" : undefined;
+
+  const data = await categoryService.getCategory(parsedIsFeatured);
+
   return res.status(200).json({
     message: "Retrieve category data",
     data,
